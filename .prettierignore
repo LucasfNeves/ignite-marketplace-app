@@ -7,5 +7,10 @@ coverage/
 *.lock
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 android/
 ios/
+.git/
+.husky/
+*.min.js
+*.bundle.js
