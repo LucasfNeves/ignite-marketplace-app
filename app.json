@@ -4,6 +4,7 @@
     "slug": "poc-native-ota",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "pocnativeota",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -13,7 +14,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.pocnativeota"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,6 +28,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
