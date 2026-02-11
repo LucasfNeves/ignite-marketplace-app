@@ -10,15 +10,15 @@
     "prettier:check": "prettier --check .",
     "ts:check": "tsc --noEmit",
     "prepare": "husky",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "dev:android": "npx expo run:android"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
     "expo": "~54.0.33",
     "expo-constants": "~18.0.13",
     "expo-device": "~8.0.10",
     "expo-linking": "~8.0.11",
-    "expo-router": "~6.1.0",
+    "expo-router": "~6.0.23",
     "expo-status-bar": "~3.0.9",
     "nativewind": "^4.2.1",
     "react": "19.1.0",
@@ -32,6 +32,7 @@
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@eslint/js": "^9.39.2",
+    "@tanstack/eslint-plugin-query": "^5.91.4",
     "@types/react": "~19.1.17",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
