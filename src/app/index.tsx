@@ -8,7 +8,7 @@ export default function App() {
       <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
 
-      <TouchableOpacity className="bg-green-900" onPress={() => router.push('/login')}>
+      <TouchableOpacity className="bg-blue-900" onPress={() => router.push('/login')}>
         <Text>Login</Text>
       </TouchableOpacity>
     </View>
