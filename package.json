@@ -11,8 +11,14 @@
     "ts:check": "tsc --noEmit",
     "prepare": "husky",
     "dev:android": "npx expo run:android",
-    "android": "expo run:android",
-    "ios": "expo run:ios"
+    "build:dev:android": "eas build --profile development --platform android",
+    "build:dev:ios": "eas build --profile development --platform ios",
+    "build:preview:android": "eas build --profile preview --platform android",
+    "build:preview:ios": "eas build --profile preview --platform ios",
+    "build:prod:android": "eas build --profile production --platform android",
+    "build:prod:ios": "eas build --profile production --platform ios",
+    "update:preview": "eas update --branch preview --message",
+    "update:prod": "eas update --branch production --message"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -20,6 +26,7 @@
     "axios": "^1.13.5",
     "expo": "~54.0.33",
     "expo-constants": "~18.0.13",
+    "expo-dev-client": "~6.0.20",
     "expo-device": "~8.0.10",
     "expo-linking": "~8.0.11",
     "expo-router": "~6.0.23",
