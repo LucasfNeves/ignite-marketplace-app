@@ -9,7 +9,7 @@ export function RegisterView(props: RegisterViewProps) {
         className="flex items-center justify-center bg-blue-500 px-4 py-2 rounded"
         onPress={onSubmit}
       >
-        <Text className="text-white text-lg">Register Editado 4</Text>
+        <Text className="text-white text-lg">Register Editado 5</Text>
       </TouchableOpacity>
     </View>
   );
