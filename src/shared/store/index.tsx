@@ -1,3 +1,3 @@
 export { useAuthStore } from './auth';
-export type { AuthSlice, AuthStore } from './auth/slice/authSlice';
-export type { SliceCreator } from './types';
+export type { AuthStore } from './auth/slice/authSlice';
+export type { StoreCreator } from './types';

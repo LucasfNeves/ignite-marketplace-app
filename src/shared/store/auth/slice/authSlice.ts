@@ -1,5 +1,5 @@
 import { UserInterface } from '@/shared/interfaces/user/user';
-import { SliceCreator } from '../../types';
+import { StoreCreator } from '../../types';
 
 interface SetSessionParams {
   user: UserInterface;
@@ -24,36 +24,30 @@ type AuthActions = {
   updateTokens: (params: UpdateTokenParams) => void;
 };
 
-export type AuthSlice = AuthState & AuthActions;
+export type AuthStore = AuthState & AuthActions;
 
-export type AuthStore = {
-  auth: AuthSlice;
-};
-
-export const createAuthSlice: SliceCreator<AuthStore, AuthSlice> = (set) => ({
+export const createAuthStore: StoreCreator<AuthStore> = (set) => ({
   user: null,
   token: null,
   refreshToken: null,
 
-  setSession: (params: SetSessionParams) =>
+  setSession: (params) =>
     set((state) => {
-      state.auth.user = params.user;
-      state.auth.token = params.token;
-      state.auth.refreshToken = params.refreshToken;
+      state.user = params.user;
+      state.token = params.token;
+      state.refreshToken = params.refreshToken;
     }),
 
   logout: () =>
     set((state) => {
-      state.auth.user = null;
-      state.auth.token = null;
-      state.auth.refreshToken = null;
+      state.user = null;
+      state.token = null;
+      state.refreshToken = null;
     }),
 
-  updateTokens: (params: UpdateTokenParams) =>
+  updateTokens: (params) =>
     set((state) => {
-      if (state.auth.user) {
-        state.auth.token = params.token;
-        state.auth.refreshToken = params.refreshToken;
-      }
+      state.token = params.token;
+      state.refreshToken = params.refreshToken;
     }),
 });

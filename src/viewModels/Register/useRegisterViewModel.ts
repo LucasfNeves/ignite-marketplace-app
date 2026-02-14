@@ -7,7 +7,7 @@ import { RegisterFormData, registerSchema } from './registerSchema';
 export function useRegisterViewModel() {
   const { registerMutation } = useRegisterMutation();
 
-  const setSession = useAuthStore((state) => state.auth.setSession);
+  const setSession = useAuthStore((state) => state.setSession);
 
   const {
     control,

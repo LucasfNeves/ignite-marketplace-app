@@ -1,13 +1,12 @@
 import { StateCreator } from 'zustand';
 
 /**
- * Tipo para criar slices com namespace (state.auth.user).
- * @template TStore - Tipo da store completa
- * @template TSlice - Tipo do slice (estado + ações)
+ * Tipo para criar stores com persist + devtools + immer.
+ * @template TStore - Tipo da store (estado + ações)
  */
-export type SliceCreator<TStore, TSlice> = StateCreator<
+export type StoreCreator<TStore> = StateCreator<
   TStore,
-  [['zustand/persist', unknown], ['zustand/devtools', never], ['zustand/immer', never]],
+  [['zustand/devtools', never], ['zustand/immer', never]],
   [],
-  TSlice
+  TStore
 >;
