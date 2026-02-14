@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { RegisterFormValues, RegisterSchema } from './RegisterSchema';
 import { useRegisterMutation } from '@/shared/queries/auth/useRegisterMutation';
 import { useStore } from '@/shared/store';
 import { useShallow } from 'zustand/shallow';
+import { RegisterFormData, registerScheme } from './RegisterSchema';
 
 export type RegisterViewProps = ReturnType<typeof useRegisterViewModel>;
 
@@ -20,8 +20,8 @@ export function useRegisterViewModel() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormValues>({
-    resolver: yupResolver(RegisterSchema),
+  } = useForm<RegisterFormData>({
+    resolver: yupResolver(registerScheme),
     defaultValues: {
       name: 'Lucas Farias',
       email: 'lucas@teste.com.br',
@@ -31,7 +31,7 @@ export function useRegisterViewModel() {
     },
   });
 
-  const onSubmit = handleSubmit(async (data: RegisterFormValues) => {
+  const onSubmit = handleSubmit(async (data: RegisterFormData) => {
     const { confirmPassword: _, ...registerData } = data;
     const { user, token, refreshToken } = await registerMutation(registerData);
     setSession({ user, token, refreshToken });

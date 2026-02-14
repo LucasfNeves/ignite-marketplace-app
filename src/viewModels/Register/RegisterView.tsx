@@ -1,16 +1,18 @@
+import { FC } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { RegisterViewProps } from './useRegisterModel';
+import { AppInputController } from '../../shared/components/AppInputController';
+import { useRegisterViewModel } from './useRegisterModel';
 
-export function RegisterView(props: RegisterViewProps) {
-  const { onSubmit } = props;
+export const RegisterView: FC<ReturnType<typeof useRegisterViewModel>> = ({
+  onSubmit,
+  control,
+}) => {
   return (
-    <View className="flex items-center justify-center h-screen">
-      <TouchableOpacity
-        className="flex items-center justify-center bg-blue-500 px-4 py-2 rounded"
-        onPress={onSubmit}
-      >
-        <Text className="text-white text-lg">Register</Text>
+    <View className="flex-1 justify-center">
+      <AppInputController leftIcon="mail-outline" label="E-MAIL" control={control} name="email" />
+      <TouchableOpacity onPress={onSubmit}>
+        <Text>Registrar</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};

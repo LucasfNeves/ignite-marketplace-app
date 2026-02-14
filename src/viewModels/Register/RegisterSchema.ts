@@ -1,20 +1,20 @@
 import * as yup from 'yup';
 
-export const RegisterSchema = yup.object({
-  name: yup.string().required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
+export const registerScheme = yup.object({
+  name: yup.string().required('Nome é obrigatório').min(4, 'Nome deve ter pelo menos 4 caracteres'),
+  email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
   password: yup
     .string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    .required('Senha é obrigatória')
+    .min(6, 'Senha deve ter pelo menos 6 caracteres'),
   confirmPassword: yup
     .string()
-    .required('Passwords must match')
-    .oneOf([yup.ref('password')], 'Passwords must match'),
+    .required('Senha é obrigatória')
+    .oneOf([yup.ref('password')], 'Senhas não coincidem'),
   phone: yup
     .string()
-    .required('Phone number is required')
-    .matches(/^\d{11}$/, 'Phone number must be 11 digits'),
+    .required('Telefone é obrigatório')
+    .matches(/^\d{11}$/, 'Telefone deve ter 11 dígitos (DDD + número)'),
 });
 
-export type RegisterFormValues = yup.InferType<typeof RegisterSchema>;
+export type RegisterFormData = yup.InferType<typeof registerScheme>;
