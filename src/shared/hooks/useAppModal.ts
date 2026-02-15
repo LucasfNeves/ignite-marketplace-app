@@ -1,13 +1,15 @@
 import { createElement } from 'react';
 import { useModalStore } from '../store/modal';
 import { Ionicons } from '@expo/vector-icons';
-import { SelectionModal, SelectionModalProps } from '../components/Modal/SelectionModal';
+import { SelectionModal, SelectionModalProps } from '../components/Modals/SelectionModal';
+
+export type SelectionVariant = 'primary' | 'secondary' | 'danger';
 
 export interface SelectionOption {
   text: string;
   onPress: () => void;
   icon?: keyof typeof Ionicons.glyphMap;
-  variant: 'primary' | 'secondary' | 'danger';
+  variant: SelectionVariant;
 }
 
 export function useAppModal() {

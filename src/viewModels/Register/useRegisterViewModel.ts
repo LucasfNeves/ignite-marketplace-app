@@ -35,7 +35,7 @@ export function useRegisterViewModel() {
   const handleSelectAvatar = () => {
     showSelectionModal({
       transparent: true,
-      title: 'Selecione um avatar',
+      title: 'Selecione uma foto',
       message: 'Escolha uma opção:',
       options: [
         {
