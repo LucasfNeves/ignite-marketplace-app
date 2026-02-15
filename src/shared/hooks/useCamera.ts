@@ -1,5 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 import { useCallback, useState } from 'react';
+import { Alert, Linking } from 'react-native';
 import { Toast } from 'toastify-react-native';
 
 interface UseCameraOptions {
@@ -19,7 +20,16 @@ export function useCamera({ allowsEditing, aspect, exif, quality }: UseCameraOpt
       const currentStatus = status === 'granted';
 
       if (!currentStatus) {
-        Toast.error('Permissão para acessar a câmera negada', 'top');
+        Alert.alert('Permissão negada!', 'Precisamos de permissão para acessar a câmera.', [
+          {
+            text: 'Cancelar',
+            style: 'cancel',
+          },
+          {
+            text: 'Abrir Configurações',
+            onPress: () => Linking.openSettings(),
+          },
+        ]);
       }
 
       return currentStatus;

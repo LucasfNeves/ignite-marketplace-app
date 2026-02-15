@@ -12,7 +12,7 @@ export function AuthFormHeader({ title, subTitle }: AuthFormHeaderProps) {
       <Image resizeMode="contain" className="w-[80px] h-[60px]" source={logo} mb-8 />
 
       <Text className="text-3xl font-bold mb-3 text-gray-500">{title}</Text>
-      <Text className="text-gray-300 text-base">{subTitle}</Text>
+      <Text className="text-gray-300 text-base text-center">{subTitle}</Text>
     </View>
   );
 }

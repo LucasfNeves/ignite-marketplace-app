@@ -3,15 +3,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegisterMutation } from '@/shared/queries/auth/useRegisterMutation';
 import { useAuthStore } from '@/shared/store';
 import { RegisterFormData, registerSchema } from './registerSchema';
-import { useAppModal } from '@/shared/hooks/useAppModal';
-import { useCamera } from '@/shared/hooks/useCamera';
+import { useImage } from '@/shared/hooks/useImage';
+import { useState } from 'react';
+import { CameraType } from 'expo-image-picker';
 
 export function useRegisterViewModel() {
-  const { registerMutation } = useRegisterMutation();
-  const { showSelectionModal } = useAppModal();
-  const { openCamera } = useCamera({});
-
   const setSession = useAuthStore((state) => state.setSession);
+
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
+  const { registerMutation } = useRegisterMutation();
+  const { handleSelectImage } = useImage({
+    callback: setAvatarUri,
+    cameraType: CameraType.front,
+  });
+
+  const handleSelectAvatar = async () => {
+    await handleSelectImage();
+  };
 
   const {
     control,
@@ -34,37 +42,11 @@ export function useRegisterViewModel() {
     setSession({ user, token, refreshToken });
   });
 
-  const handleSelectAvatar = () => {
-    showSelectionModal({
-      transparent: true,
-      title: 'Selecione uma foto',
-      message: 'Escolha uma opção:',
-      options: [
-        {
-          text: 'Galeria',
-          icon: 'image',
-          variant: 'primary',
-          onPress: () => {
-            console.log('Galeria');
-          },
-        },
-        {
-          text: 'Câmera',
-          icon: 'camera',
-          variant: 'primary',
-          onPress: async () => {
-            const uri = await openCamera();
-            console.log('Câmera:', uri);
-          },
-        },
-      ],
-    });
-  };
-
   return {
     onSubmit,
     control,
     errors,
     handleSelectAvatar,
+    avatarUri,
   };
 }
