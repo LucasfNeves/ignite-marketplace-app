@@ -32,7 +32,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     favicon: './assets/favicon.png',
     bundler: 'metro',
   },
-  plugins: ['expo-router'],
+  plugins: [
+    'expo-router',
+    'expo-font',
+    [
+      'expo-image-picker',
+      {
+        photosPermission:
+          'Este app precisa de acesso a sua galeria de fotos para selecionar uma foto.',
+        cameraPermission: 'Este app precisa de acesso a sua câmera para tirar uma foto.',
+      },
+    ],
+  ],
   extra: {
     router: {},
     eas: {

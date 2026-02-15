@@ -18,7 +18,9 @@
     "build:prod:android": "eas build --profile production --platform android",
     "build:prod:ios": "eas build --profile production --platform ios",
     "update:preview": "eas update --branch preview --message",
-    "update:prod": "eas update --branch production --message"
+    "update:prod": "eas update --branch production --message",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
