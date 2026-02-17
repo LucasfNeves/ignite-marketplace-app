@@ -6,20 +6,15 @@ import { RegisterFormData, registerSchema } from './registerSchema';
 import { useImage } from '@/shared/hooks/useImage';
 import { useState } from 'react';
 import { CameraType } from 'expo-image-picker';
+import { useUploadAvatarMutation } from '@/shared/queries/auth/useUploadAvatarMutation';
+import { Toast } from 'toastify-react-native';
 
 export function useRegisterViewModel() {
-  const setSession = useAuthStore((state) => state.setSession);
-
+  const { setSession, updateUser } = useAuthStore();
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
-  const { registerMutation } = useRegisterMutation();
-  const { handleSelectImage } = useImage({
-    callback: setAvatarUri,
-    cameraType: CameraType.front,
-  });
 
-  const handleSelectAvatar = async () => {
-    await handleSelectImage();
-  };
+  const { registerMutation } = useRegisterMutation({ onSucess: uploadImage });
+  const { uploadAvatarMutation } = useUploadAvatarMutation();
 
   const {
     control,
@@ -35,6 +30,31 @@ export function useRegisterViewModel() {
       confirmPassword: '1234567',
     },
   });
+
+  const { handleSelectImage } = useImage({
+    callback: setAvatarUri,
+    cameraType: CameraType.front,
+  });
+
+  const handleSelectAvatar = async () => {
+    handleSelectImage();
+  };
+
+  async function uploadImage() {
+    if (!avatarUri) return null;
+
+    try {
+      const { url } = await uploadAvatarMutation(avatarUri);
+
+      console.log('Avatar URL:', url);
+      updateUser({ avatarUrl: url });
+
+      return url;
+    } catch {
+      Toast.error('Erro ao fazer upload do avatar');
+      return null;
+    }
+  }
 
   const onSubmit = handleSubmit(async (data: RegisterFormData) => {
     const { confirmPassword: _, ...registerData } = data;

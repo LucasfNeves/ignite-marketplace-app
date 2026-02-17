@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosInstance } from 'axios';
 import { Platform } from 'react-native';
 
@@ -22,10 +23,35 @@ export class ApiClient {
         'Content-Type': 'application/json',
       },
     });
+
+    this.setupInterceptors();
   }
 
   getInstance() {
     return this.instance;
+  }
+
+  private setupInterceptors() {
+    this.instance.interceptors.request.use(
+      async (config) => {
+        const userData = await AsyncStorage.getItem('auth-storage');
+
+        if (userData) {
+          const {
+            state: { token },
+          } = JSON.parse(userData);
+
+          if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+          }
+        }
+
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
   }
 }
 

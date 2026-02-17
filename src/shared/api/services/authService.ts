@@ -23,7 +23,7 @@ export async function uploadAvatar(uri: string) {
     type: 'image/jpeg',
   } as unknown as Blob);
 
-  const { data } = await apiClient.post<UploadAvatarHttpResponse>('/users/avatar', formData, {
+  const { data } = await apiClient.post<UploadAvatarHttpResponse>('/user/avatar', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

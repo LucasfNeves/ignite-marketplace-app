@@ -22,6 +22,7 @@ type AuthActions = {
   setSession: (params: SetSessionParams) => void;
   logout: () => void;
   updateTokens: (params: UpdateTokenParams) => void;
+  updateUser: (updatedUserData: Partial<UserInterface>) => void;
 };
 
 export type AuthStore = AuthState & AuthActions;
@@ -49,5 +50,12 @@ export const createAuthStore: StoreCreator<AuthStore> = (set) => ({
     set((state) => {
       state.token = params.token;
       state.refreshToken = params.refreshToken;
+    }),
+
+  updateUser: (updatedUserData) =>
+    set((state) => {
+      if (state.user) {
+        state.user = { ...state.user, ...updatedUserData };
+      }
     }),
 });
